@@ -6,11 +6,15 @@ class Direction(Enum):
     UP = 2
     LEFT = 3
     IDLE = 4
+    R_DIAGONAL = 5
+    R_DIAGONAL_REV = 6
+    L_DIAGONAL= 7
+    L_DIAGONAL_REV = 8 
 
-rows = [["A", "D", "O", "G"], ["A", "B", "C", "D"], ["A", "B", "C", "D"]];
-words = ["DOG"]
+# rows = [["A", "I", "C", "D"], ["A", "B", "U", "D"], ["A", "B", "C", "O"]];
+# words = ["OUI"]
 
-def getNeighbor(i, j, direct: Direction):
+def getNeighbor(i, j, rows, direct: Direction):
     letter = ""
     if direct == Direction.DOWN:
         try:
@@ -40,6 +44,38 @@ def getNeighbor(i, j, direct: Direction):
             return "", "", ""
 
         j -= 1
+    elif direct == Direction.R_DIAGONAL:
+        try:
+            letter = rows[i + 1][j + 1]
+        except:
+            return "", "", ""
+
+        j += 1
+        i += 1
+    elif direct == Direction.R_DIAGONAL_REV:
+        try:
+            letter = rows[i - 1][j - 1]
+        except:
+            return "", "", ""
+
+        j -= 1
+        i -= 1
+    elif direct == Direction.L_DIAGONAL:
+        try:
+            letter = rows[i - 1][j + 1]
+        except:
+            return "", "", ""
+
+        j += 1
+        i -= 1
+    elif direct == Direction.L_DIAGONAL_REV:
+        try:
+            letter = rows[i + 1][j - 1]
+        except:
+            return "", "", ""
+
+        j -= 1
+        i += 1
     elif direct == Direction.IDLE:
         try:
             letter = rows[i][j]
@@ -49,7 +85,7 @@ def getNeighbor(i, j, direct: Direction):
     return i, j, letter
 
 
-def solve(word):
+def solve(word, rows):
     i_cords = []
     j_cords = []
     for i in range(len(rows)):
@@ -57,10 +93,11 @@ def solve(word):
             c_i = i
             c_j = j
 
-            p_i, p_j, p_letter = getNeighbor(c_i, c_j, Direction.IDLE)
+            p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.IDLE)
 
             if p_letter == word[0]:
                 failed = False
+                num_failed = 0
 
                 p_word = p_letter
 
@@ -69,7 +106,7 @@ def solve(word):
 
                 for letter in word[1:]:
 
-                    p_i, p_j, p_letter = getNeighbor(c_i, c_j, Direction.DOWN)
+                    p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.DOWN)
 
                     if p_letter == letter:
                         c_i = p_i
@@ -78,6 +115,7 @@ def solve(word):
                         j_cords.append(c_j)
                     else:
                         failed = True
+                        num_failed += 1
                         break
                 
                 if failed:
@@ -85,7 +123,7 @@ def solve(word):
                     i_cords = [i]
                     j_cords = [j]
                     for letter in word[1:]:
-                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, Direction.RIGHT)
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.RIGHT)
 
                         if p_letter == letter:
                             c_i = p_i
@@ -94,6 +132,7 @@ def solve(word):
                             j_cords.append(c_j)
                         else:
                             failed = True
+                            num_failed += 1
                             break
                 
                 if failed:
@@ -101,7 +140,7 @@ def solve(word):
                     i_cords = [i]
                     j_cords = [j]
                     for letter in word[1:]:
-                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, Direction.UP)
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.UP)
 
                         if p_letter == letter:
                             c_i = p_i
@@ -110,6 +149,7 @@ def solve(word):
                             j_cords.append(c_j)
                         else:
                             failed = True
+                            num_failed += 1
                             break
 
                 if failed:
@@ -117,7 +157,7 @@ def solve(word):
                     i_cords = [i]
                     j_cords = [j]
                     for letter in word[1:]:
-                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, Direction.LEFT)
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.LEFT)
 
                         if p_letter == letter:
                             c_i = p_i
@@ -126,20 +166,79 @@ def solve(word):
                             j_cords.append(c_j)
                         else:
                             failed = True
+                            num_failed += 1
                             break
                 
-                return i_cords, j_cords
-    return i_cords, j_cords
+                if failed:
+                    failed = False
+                    i_cords = [i]
+                    j_cords = [j]
+                    for letter in word[1:]:
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.R_DIAGONAL)
 
+                        if p_letter == letter:
+                            c_i = p_i
+                            c_j = p_j
+                            i_cords.append(c_i)
+                            j_cords.append(c_j)
+                        else:
+                            failed = True
+                            num_failed += 1
+                            break
 
+                if failed:
+                    failed = False
+                    i_cords = [i]
+                    j_cords = [j]
+                    for letter in word[1:]:
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.R_DIAGONAL_REV)
 
-print(solve(words[0]))
-    
-# if rows[i][j] == word[0]:
-#     for letter in word:
-#             p_i, p_j, p_letter = getNeighbor(i, j, Direction.DOWN)
-#             if p_letter == letter:
-#                 i = p_i
-#                 j = p_j
+                        if p_letter == letter:
+                            c_i = p_i
+                            c_j = p_j
+                            i_cords.append(c_i)
+                            j_cords.append(c_j)
+                        else:
+                            failed = True
+                            num_failed += 1
+                            break
+                
+                if failed:
+                    failed = False
+                    i_cords = [i]
+                    j_cords = [j]
+                    for letter in word[1:]:
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.L_DIAGONAL)
 
-                    
+                        if p_letter == letter:
+                            c_i = p_i
+                            c_j = p_j
+                            i_cords.append(c_i)
+                            j_cords.append(c_j)
+                        else:
+                            failed = True
+                            num_failed += 1
+                            break
+                
+                if failed:
+                    failed = False
+                    i_cords = [i]
+                    j_cords = [j]
+                    for letter in word[1:]:
+                        p_i, p_j, p_letter = getNeighbor(c_i, c_j, rows, Direction.L_DIAGONAL_REV)
+
+                        if p_letter == letter:
+                            c_i = p_i
+                            c_j = p_j
+                            i_cords.append(c_i)
+                            j_cords.append(c_j)
+                        else:
+                            failed = True
+                            num_failed += 1
+                            break
+                
+                if num_failed != 8:
+                    return i_cords, j_cords
+                else:
+                    continue
+    return [], []
