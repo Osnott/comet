@@ -99,8 +99,6 @@ def solve(word, rows):
                 failed = False
                 num_failed = 0
 
-                p_word = p_letter
-
                 i_cords = [i]
                 j_cords = [j]
 
@@ -116,6 +114,8 @@ def solve(word, rows):
                     else:
                         failed = True
                         num_failed += 1
+                        c_i = i
+                        c_j = j
                         break
                 
                 if failed:
@@ -133,6 +133,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
                 
                 if failed:
@@ -150,6 +152,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
 
                 if failed:
@@ -167,6 +171,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
                 
                 if failed:
@@ -184,6 +190,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
 
                 if failed:
@@ -201,6 +209,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
                 
                 if failed:
@@ -218,6 +228,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
                 
                 if failed:
@@ -235,6 +247,8 @@ def solve(word, rows):
                         else:
                             failed = True
                             num_failed += 1
+                            c_i = i
+                            c_j = j
                             break
                 
                 if num_failed != 8:
