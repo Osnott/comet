@@ -6,4 +6,10 @@ def parse(text: str):
     
     return rows
 
-# print(parse("ABCD\nEFGH\nIJKL\nMNOP"))
+def rev_parse(rows):
+    text = ""
+    for i in range(len(rows)):
+        for j in range(len(rows[i])):
+            text += rows[i][j]
+    
+    return text
