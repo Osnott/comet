@@ -15,7 +15,7 @@ def display(rows, words, solves):
         for j in range(len(rows[i])):
             if j == 0:
                 rows[i][j] = rows[i][j] + " "
-            elif j == len(rows[i])-1:
+            elif j == len(rows[i]) - 1:
                 rows[i][j] = " " + rows[i][j] + "\n"
             else:
                 rows[i][j] = " " + rows[i][j] + " "
