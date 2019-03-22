@@ -25,7 +25,7 @@ for word in words:
 print("Solves:")
 print(solves)
 
-print("Pretty print:")
-print(rev_parse(display(rows, words, solves)))
+# print("Pretty print:")
+# print(rev_parse(display(rows, words, solves)))
 
-# TODO: Fix no solve out of range error
+# TODO: Do pretty print
