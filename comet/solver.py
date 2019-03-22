@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Direction(Enum):
     DOWN = 0
     RIGHT = 1
@@ -8,46 +9,47 @@ class Direction(Enum):
     IDLE = 4
     R_DIAGONAL = 5
     R_DIAGONAL_REV = 6
-    L_DIAGONAL= 7
-    L_DIAGONAL_REV = 8 
+    L_DIAGONAL = 7
+    L_DIAGONAL_REV = 8
 
 # rows = [["A", "I", "C", "D"], ["A", "B", "U", "D"], ["A", "B", "C", "O"]];
 # words = ["OUI"]
+
 
 def getNeighbor(i, j, rows, direct: Direction):
     letter = ""
     if direct == Direction.DOWN:
         try:
             letter = rows[i + 1][j]
-        except:
+        except IndexError:
             return "", "", ""
 
         i += 1
     elif direct == Direction.RIGHT:
         try:
             letter = rows[i][j + 1]
-        except:
+        except IndexError:
             return "", "", ""
 
         j += 1
     elif direct == Direction.UP:
         try:
             letter = rows[i - 1][j]
-        except:
+        except IndexError:
             return "", "", ""
 
         i -= 1
     elif direct == Direction.LEFT:
         try:
             letter = rows[i][j - 1]
-        except:
+        except IndexError:
             return "", "", ""
 
         j -= 1
     elif direct == Direction.R_DIAGONAL:
         try:
             letter = rows[i + 1][j + 1]
-        except:
+        except IndexError:
             return "", "", ""
 
         j += 1
@@ -55,7 +57,7 @@ def getNeighbor(i, j, rows, direct: Direction):
     elif direct == Direction.R_DIAGONAL_REV:
         try:
             letter = rows[i - 1][j - 1]
-        except:
+        except IndexError:
             return "", "", ""
 
         j -= 1
@@ -63,7 +65,7 @@ def getNeighbor(i, j, rows, direct: Direction):
     elif direct == Direction.L_DIAGONAL:
         try:
             letter = rows[i - 1][j + 1]
-        except:
+        except IndexError:
             return "", "", ""
 
         j += 1
@@ -71,7 +73,7 @@ def getNeighbor(i, j, rows, direct: Direction):
     elif direct == Direction.L_DIAGONAL_REV:
         try:
             letter = rows[i + 1][j - 1]
-        except:
+        except IndexError:
             return "", "", ""
 
         j -= 1
@@ -79,9 +81,9 @@ def getNeighbor(i, j, rows, direct: Direction):
     elif direct == Direction.IDLE:
         try:
             letter = rows[i][j]
-        except:
+        except IndexError:
             return "", "", ""
-    
+
     return i, j, letter
 
 
@@ -117,7 +119,7 @@ def solve(word, rows):
                         c_i = i
                         c_j = j
                         break
-                
+
                 if failed:
                     failed = False
                     i_cords = [i]
@@ -136,7 +138,7 @@ def solve(word, rows):
                             c_i = i
                             c_j = j
                             break
-                
+
                 if failed:
                     failed = False
                     i_cords = [i]
@@ -174,7 +176,7 @@ def solve(word, rows):
                             c_i = i
                             c_j = j
                             break
-                
+
                 if failed:
                     failed = False
                     i_cords = [i]
@@ -212,7 +214,7 @@ def solve(word, rows):
                             c_i = i
                             c_j = j
                             break
-                
+
                 if failed:
                     failed = False
                     i_cords = [i]
@@ -231,7 +233,7 @@ def solve(word, rows):
                             c_i = i
                             c_j = j
                             break
-                
+
                 if failed:
                     failed = False
                     i_cords = [i]
@@ -250,7 +252,7 @@ def solve(word, rows):
                             c_i = i
                             c_j = j
                             break
-                
+
                 if num_failed != 8:
                     return i_cords, j_cords
                 else:

@@ -1,7 +1,6 @@
 from ocr import recognize
-from parse import parse, rev_parse
+from parse import parse
 from solver import solve
-from display import display
 
 file = open("words.txt", "r")
 

@@ -1,6 +1,7 @@
 import cv2
 import pytesseract
 
+
 def recognize():
     # Read image path from command line
     imPath = "test/test-images/WordSearchPuzzle.jpg"
@@ -12,7 +13,6 @@ def recognize():
     # '-l eng'  for using the English language
     # '--oem 1' for using LSTM OCR Engine
     #  --psm 6
-    config = ('-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ --oem 1')
 
     # Read image from disk
     im = cv2.imread(imPath, cv2.IMREAD_COLOR)

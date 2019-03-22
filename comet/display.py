@@ -8,9 +8,8 @@ def display(rows, words, solves):
                             rows[i][j] = "|"
                             continue
                             # rows[i][j] = Color.BOLD + rows[i][j] + Color.END
-                    except:
+                    except IndexError:
                         continue
-    
 
     for i in range(len(rows)):
         for j in range(len(rows[i])):
@@ -20,5 +19,4 @@ def display(rows, words, solves):
                 rows[i][j] = " " + rows[i][j] + "\n"
             else:
                 rows[i][j] = " " + rows[i][j] + " "
-    
     return rows
