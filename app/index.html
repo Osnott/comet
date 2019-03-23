@@ -6,20 +6,31 @@
     <title>Comet OCR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
     <h1>Comet</h1>
     <h3>An OCR solution for word searches using Google's Tesseract OCR</h3>
-
-    <span class="build">
-
-    </span>
-    <span class="codeQuality">
-
-    </span>
-    <div class="openButton">
-        
+    <div class="wrapper">
+        <span class="build">
+            <a
+                href="https://travis-ci.org/Osnott/comet">
+            <img src="https://travis-ci.org/Osnott/comet.svg?branch=site">
+        </span>
+        <span class="codeQuality">
+            <a
+                href="https://www.codacy.com/app/Osnott/comet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Osnott/comet&amp;utm_campaign=Badge_Grade"><img
+                    src="https://api.codacy.com/project/badge/Grade/e9e55822f296470e897982f53ea84fb6" /></a>
+        </span>
+    </div>
+    <div class="openButtonWrapper">
+        <a class="openButton" href="#">
+            <p>Open Image</p>
+        </a>
+    </div>
+    <div class="wordsBoxWrapper">
+        <input class="wordsBox" type="text" placeholder="Words to Find in the Image (Separate with Spaces)">
     </div>
 </body>
 </html>
